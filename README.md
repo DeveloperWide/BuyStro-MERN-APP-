@@ -1,2 +1,2 @@
-# BuyStro-MERN-APP-
-A full stack project we will be building live...!
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
