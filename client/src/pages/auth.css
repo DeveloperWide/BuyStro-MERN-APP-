@@ -1,0 +1,164 @@
+/* auth.css - load from AuthLayout.jsx (import './auth.css') */
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* Glass input style */
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  color: white;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 4px 18px rgba(10, 10, 20, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+}
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+.glass-input:focus {
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+/* Underline slider */
+.underline {
+  pointer-events: none;
+  top: 4px;
+  height: calc(100% - 8px);
+  left: 4px;
+  width: calc(50% - 8px);
+  border-radius: 9999px;
+  z-index: 0;
+  transform: translateX(0);
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.3, 1), width 200ms ease;
+}
+
+/* Buttons */
+.btn-neon {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.14),
+    rgba(59, 130, 246, 0.22)
+  );
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: white;
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.02);
+}
+.btn-neon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.18),
+    0 0 36px rgba(59, 130, 246, 0.06);
+}
+
+/* soft white */
+.btn-soft {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.btn-soft:hover {
+  transform: translateY(-2px);
+}
+
+/* gradient */
+.btn-gradient {
+  background: linear-gradient(90deg, #6d28d9, #3b82f6);
+  border: none;
+  color: white;
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.14);
+}
+.btn-gradient:hover {
+  transform: translateY(-2px);
+}
+
+/* small decorative circle */
+.glass-circle {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 30px rgba(6, 6, 23, 0.6);
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+  .underline {
+    top: 6px;
+    left: 6px;
+    width: calc(50% - 12px);
+  }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 400ms ease-out both;
+}
+
+/* Input glass style */
+.glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  transition: 0.2s ease;
+}
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.glass-input:focus {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  outline: none;
+}
+
+/* Sliding underline */
+.underline {
+  pointer-events: none;
+  height: calc(100% - 8px);
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 8px);
+  border-radius: 9999px;
+  transition: 300ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Blue CTA Button */
+.btn-blue {
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  transition: 0.25s;
+}
+.btn-blue:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+.btn-blue:active {
+  transform: scale(0.98);
+}
