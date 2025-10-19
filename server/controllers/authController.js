@@ -124,5 +124,9 @@ export const login = async (req, res) => {
 };
 
 export const getMe = async (req, res) => {
-  res.send("You're Signed in.");
+  return res.status(200).json({
+    success: true,
+    message: "You're Successsfully logged in",
+    user: req.user,
+  });
 };
