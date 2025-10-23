@@ -1,42 +1,71 @@
-// Register.jsx
-import React from 'react';
-import AuthForm from './AuthForm';
+import axios from "axios";
+import { useState } from "react";
 
 const Register = () => {
-  const handleRegister = (data) => {
-    // replace with real register logic / API call
-    console.log('Register data:', data);
-    alert('Registered (demo). Check console for payload.');
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const onChangeHandler = (e) => {
+    setFormData((prevFormData) => {
+      return { ...prevFormData, [e.target.name]: e.target.value };
+    });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/auth/signup", formData)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('token' , res.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div>
-      <AuthForm
-        fields={[
-          {
-            name: 'name',
-            type: 'text',
-            placeholder: 'Full name',
-            autoComplete: 'name',
-          },
-          {
-            name: 'email',
-            type: 'email',
-            placeholder: 'you@domain.com',
-            autoComplete: 'email',
-          },
-          {
-            name: 'password',
-            type: 'password',
-            placeholder: 'Choose a strong password',
-            autoComplete: 'new-password',
-          },
-        ]}
-        onSubmit={handleRegister}
-        submitLabel="Create Account"
-        variant="neon"
+    <form className="p-2" onSubmit={onSubmitHandler}>
+      <input
+        type="name"
+        name="name"
+        placeholder="John Doe"
+        className="name"
+        onChange={onChangeHandler}
+        value={formData.name}
       />
-    </div>
+
+      <br />
+      <br />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="johndoe9239@gmail.com"
+        className="email"
+        onChange={onChangeHandler}
+        value={formData.email}
+      />
+
+      <br />
+      <br />
+
+      <input
+        type="password"
+        name="password"
+        placeholder="john@92399"
+        className="password"
+        onChange={onChangeHandler}
+        value={formData.password}
+      />
+
+      <br />
+      <br />
+      <button className="btn">Submit</button>
+    </form>
   );
 };
 

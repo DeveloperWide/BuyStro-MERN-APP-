@@ -1,49 +1,59 @@
-// Login.jsx
-import React from 'react';
-import AuthForm from './AuthForm';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Login = () => {
-  const handleLogin = (data) => {
-    // replace with real login logic / API call
-    console.log('Login data:', data);
-    alert('Logged in (demo). Check console for payload.');
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeHandler = (e) => {
+    setFormData((prevFormData) => {
+      return { ...prevFormData, [e.target.name]: e.target.value };
+    });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/auth/login", formData)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('token' , res.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div>
-      <AuthForm
-        fields={[
-          {
-            name: 'email',
-            type: 'email',
-            placeholder: 'you@domain.com',
-            autoComplete: 'email',
-          },
-          {
-            name: 'password',
-            type: 'password',
-            placeholder: 'Your strong password',
-            autoComplete: 'current-password',
-          },
-        ]}
-        onSubmit={handleLogin}
-        submitLabel="Login"
-        variant="neon"
-        extraNode={
-          <div className="flex items-center justify-between text-xs text-white/70 mt-1">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="remember"
-                className="accent-white/90"
-              />{' '}
-              Remember me
-            </label>
-          </div>
-        }
+    <form className='p-2' onSubmit={onSubmitHandler}>
+      <input 
+      type="email" 
+      name='email'  
+      placeholder='johndoe9239@gmail.com' 
+      className='email'
+      onChange={onChangeHandler}
+      value={formData.email}
       />
-    </div>
-  );
-};
 
-export default Login;
+      <br />
+      <br />
+
+      <input 
+      type="password" 
+      name='password' 
+      placeholder='john@92399' 
+      className='password' 
+      onChange={onChangeHandler}
+      value={formData.password}
+      />
+
+      <br />
+      <br />
+      <button className='btn'>Submit</button>
+    </form>
+  )
+}
+
+export default Login

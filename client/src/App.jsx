@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router';
 import AuthLayout from './pages/AuthLayout.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
+import GetMe from './pages/GetMe.jsx';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
+      <Route path='/me' element={<GetMe />}/>
     </Routes>
   );
 };
