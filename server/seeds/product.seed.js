@@ -9,6 +9,7 @@ connectDb().then((res) => {
 })
 
 const initData = async (data) => {
+    const deletePrevData = await Product.deleteMany({});
     const insertedData = await Product.insertMany(data);
     console.log(insertedData)
 }

@@ -1,14 +1,8 @@
 import express from "express";
-import Product from "../models/Product.js";
+import { createProduct, getAllProducts } from "../controllers/productController.js";
 const router = express.Router();
 
-
-router.get("/all", async (req, res) => {
-    const allProducts = await Product.find();
-    res.status(200).json({
-        success: true,
-        data: allProducts
-    })
-})
+router.get("/all", getAllProducts);
+router.post('/create', createProduct)
 
 export default router;

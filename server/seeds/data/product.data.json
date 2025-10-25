@@ -1,82 +1,110 @@
 [
   {
-    "title": "Wireless Bluetooth Headphones",
-    "image": "https://images.unsplash.com/photo-1518441310470-677eee6f2232"
-  },
-  {
-    "title": "Smart Fitness Watch",
-    "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+    "title": "Wireless Bluetooth Earbuds",
+    "description": "High-quality wireless earbuds with noise cancellation and 24H backup.",
+    "quantity": 50,
+    "images": [
+      "https://m.media-amazon.com/images/I/713Lr2oNWaL._SY355_.jpg",
+      "https://m.media-amazon.com/images/I/61w8wP6CipL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/61Re5416SkL._SL1500_.jpg"
+    ],
+    "price": 1999
   },
   {
     "title": "Gaming Mechanical Keyboard",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+    "description": "RGB backlit mechanical keyboard with blue switches for fast response.",
+    "quantity": 20,
+    "images": [
+      "https://m.media-amazon.com/images/I/617q9MVCT9L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/61bJ6Cyi6-L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/61IWkRBqJeL._SL1500_.jpg"
+    ],
+    "price": 3499
   },
   {
-    "title": "Portable Bluetooth Speaker",
-    "image": "https://images.unsplash.com/photo-1585386959984-a4155224a1ad"
+    "title": "Smart Fitness Watch",
+    "description": "Fitness smartwatch with heart-rate tracking and step counter.",
+    "quantity": 35,
+    "images": [
+      "https://m.media-amazon.com/images/I/61zBJcICfFL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/71+LG8vAo1L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/71CjFbuRDEL._SL1500_.jpg"
+    ],
+    "price": 2499
   },
   {
-    "title": "4K Ultra HD Monitor",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+    "title": "Laptop Stand",
+    "description": "Aluminum adjustable laptop stand for better posture and airflow.",
+    "quantity": 60,
+    "images": [
+      "https://example.com/images/stand-1.jpg"
+    ],
+    "price": 899
   },
   {
-    "title": "DSLR Professional Camera",
-    "image": "https://images.unsplash.com/photo-1519181245277-cffeb31da2bb"
+    "title": "Portable Power Bank 20000mAh",
+    "description": "Fast charging power bank with dual USB output.",
+    "quantity": 40,
+    "images": [
+      "https://m.media-amazon.com/images/I/61kBmC8NfGL._SL1080_.jpg",
+      "https://m.media-amazon.com/images/I/61uoZcC6GlL._SL1080_.jpg",
+      "https://m.media-amazon.com/images/I/61Z8ogFxAOL._SL1080_.jpg"
+    ],
+    "price": 1599
   },
   {
-    "title": "Noise Cancelling Earbuds",
-    "image": "https://images.unsplash.com/photo-1585386959984-a4155224a1ad"
+    "title": "USB-C Hub 8-in-1",
+    "description": "Multi-port USB-C hub for MacBook and Windows laptops.",
+    "quantity": 18,
+    "images": [
+      "https://m.media-amazon.com/images/I/61aL8UdM7gL._SX466_.jpg",
+      "https://m.media-amazon.com/images/I/71xNFT8Hh2L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/717UqkC6diL._SL1500_.jpg"
+    ],
+    "price": 2999
   },
   {
-    "title": "Smart LED Table Lamp",
-    "image": "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0"
+    "title": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with long battery life.",
+    "quantity": 80,
+    "images": [
+      "https://m.media-amazon.com/images/I/51vMo-pHZ5L._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/716-80YSCcL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/71eY2iiOolL._SL1500_.jpg"
+    ],
+    "price": 699
   },
   {
-    "title": "Laptop Cooling Pad",
-    "image": "https://images.unsplash.com/photo-1587202372775-98927d30ffb3"
+    "title": "External SSD 1TB",
+    "description": "High-speed portable SSD with 1TB storage capacity.",
+    "quantity": 12,
+    "images": [
+      "https://m.media-amazon.com/images/I/41FEEQDVQiL._SL1080_.jpg",
+      "https://m.media-amazon.com/images/I/61-60csvLgL._SL1080_.jpg",
+      "https://m.media-amazon.com/images/I/71jDeOfT8hL._SL1080_.jpg"
+    ],
+    "price": 7999
   },
   {
-    "title": "Professional Microphone",
-    "image": "https://images.unsplash.com/photo-1511379938547-c1f69419868d"
+    "title": "4K Action Camera",
+    "description": "Waterproof 4K action camera with wide-angle lens.",
+    "quantity": 7,
+    "images": [
+      "https://m.media-amazon.com/images/I/61nZFhJc1yL._SL1426_.jpg",
+      "https://m.media-amazon.com/images/I/512QnGh4W4L.jpg",
+      "https://m.media-amazon.com/images/I/61BOq4hFABL._SL1153_.jpg"
+    ],
+    "price": 4999
   },
   {
-    "title": "Ergonomic Office Chair",
-    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc"
-  },
-  {
-    "title": "Premium Leather Wallet",
-    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-  },
-  {
-    "title": "Stainless Steel Water Bottle",
-    "image": "https://images.unsplash.com/photo-1571974092236-6d4d3757a23d"
-  },
-  {
-    "title": "Mini Action Camera",
-    "image": "https://images.unsplash.com/photo-1519183071298-a2962be90b8e"
-  },
-  {
-    "title": "Portable Hard Drive 1TB",
-    "image": "https://images.unsplash.com/photo-1587202372775-98927d30ffb3"
-  },
-  {
-    "title": "Foldable Laptop Stand",
-    "image": "https://images.unsplash.com/photo-1557862921-37829c790f19"
-  },
-  {
-    "title": "Smartphone Tripod",
-    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8"
-  },
-  {
-    "title": "VR Gaming Headset",
-    "image": "https://images.unsplash.com/photo-1551817958-a9ba0e2a8a6a"
-  },
-  {
-    "title": "Wireless Gaming Mouse",
-    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
-  },
-  {
-    "title": "LED Desk Clock",
-    "image": "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0"
+    "title": "Bluetooth Speaker",
+    "description": "Portable speaker with deep bass and clear sound.",
+    "quantity": 22,
+    "images": [
+      "https://m.media-amazon.com/images/I/71Gn7eWoLUL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/81arGgNwiIL._SL1500_.jpg",
+      "https://m.media-amazon.com/images/I/71KdlRQ5pjL._SL1500_.jpg"
+    ],
+    "price": 1299
   }
 ]
