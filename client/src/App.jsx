@@ -4,6 +4,7 @@ import AuthLayout from './pages/AuthLayout.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import GetMe from './pages/GetMe.jsx';
+import { Products } from './pages/Products.jsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="register" element={<Register />} />
       </Route>
       <Route path='/me' element={<GetMe />}/>
+      <Route path='/products' element={<Products />}/>
     </Routes>
   );
 };
