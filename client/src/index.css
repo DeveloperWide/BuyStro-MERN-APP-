@@ -24,3 +24,7 @@ input {
 .redirectionMsg p a{
   @apply text-[#273EBC]
 }
+
+.product-btn{
+@apply w-full py-3 text-white rounded-xl  text-lg
+}

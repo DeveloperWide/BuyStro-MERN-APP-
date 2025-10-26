@@ -8,7 +8,7 @@ const AuthLayout = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="auth-card relative w-full max-w-[400px] mx-auto rounded-2xl overflow-hidden shadow-2xl border border-black/10 backdrop-blur-xl animate-fadeIn">
-        <div className="w-full p-8 flex flex-col justify-center items-center gap-6">
+        <div className="w-full  flex flex-col justify-center items-center gap-6">
           {/* Title */}
           <h2 className="text-2xl md:text-3xl font-semibold">{getTitle(location)}</h2>
 
@@ -17,7 +17,7 @@ const AuthLayout = () => {
             <div className="tabs flex rounded-2xl border border-gray-400">
               <Link
                 to="/login"
-                className={`tab flex-1 text-center py-3 font-bold rounded-2xl transition-all text-sm md:text-base ${
+                className={`tab flex-1 text-center font-bold rounded-2xl transition-all text-sm md:text-base ${
                   active("/login", location)
                     ? "bg-gradient-to-r from-[#273EBC] to-[#385AF6] text-white"
                     : ""
@@ -28,7 +28,7 @@ const AuthLayout = () => {
 
               <Link
                 to="/register"
-                className={`tab flex-1 text-center py-3 font-bold rounded-2xl transition-all text-sm md:text-base ${
+                className={`tab flex-1 text-center font-bold rounded-2xl transition-all text-sm md:text-base ${
                   active("/register", location)
                     ? "bg-gradient-to-r from-[#273EBC] to-[#385AF6] text-white"
                     : ""

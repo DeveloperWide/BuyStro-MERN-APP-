@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -15,25 +16,19 @@ export const Products = () => {
       });
   }, []);
 
-  console.log(products);
+  const truncateText = (text, limit) => {
+    if (!text) return "";
+    return text.length > limit ? text.substring(0, limit) + "..." : text;
+  };
+
+  console.log(products)
 
   return (
-    <div className="min-h-screen grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-10">
+    <div className="min-h-screen flex flex-wrap gap-10 my-4 mx-3 justify-center items-center overflow-x-hidden">
       {products && products.length > 0 ? (
         products.map((product, idx) => {
           return (
-            <div className="card bg-base-100 w-96 shadow-sm" key={idx}>
-              <figure>
-                <img src={product.images[2]} alt={product.title} />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{product.title}</h2>
-                <p>{product.description}</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
+            <ProductCard Title={product.title} Description={product.description} ImageSrc={product.images[2]} productId={product._id} Price={product.price} key={idx}/>
           );
         })
       ) : (
