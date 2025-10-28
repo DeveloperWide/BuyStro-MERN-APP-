@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router"
+import { ShoppingCart } from "lucide-react";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
   return (
@@ -19,9 +20,9 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
       </Link>
 
       <button
-        className="w-full py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 cursor-pointer active:scale-95 transition-all duration-200"
+        className="w-full py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 cursor-pointer active:scale-95 transition-all duration-200 flex gap-2 justify-center items-center"
       >
-        Add to Cart
+       <ShoppingCart /> Add to Cart
       </button>
     </div>
   );
