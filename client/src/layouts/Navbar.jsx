@@ -7,12 +7,12 @@ const Navbar = () => {
       {/* BuyStro Logo */}
       <div className="logo flex gap-1 justify-center items-center">
         <img
-          src="../../public/shopping-cart.png"
+          src="/shopping-cart.png"
           alt="BuyStro Logo"
           className="h-10"
         />
         <img
-          src="../../public/BuyStro.png"
+          src="/BuyStro.png"
           alt="BuyStro Logo"
           className="h-8 self-end"
         />

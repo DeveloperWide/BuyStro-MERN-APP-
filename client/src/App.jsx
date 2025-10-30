@@ -5,6 +5,7 @@ import Register from "./components/Register.jsx";
 import GetMe from "./pages/GetMe.jsx";
 import { Products } from "./pages/Products.jsx";
 import PrivateLayout from "./layouts/PrivateLayout.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Route element={<PrivateLayout />}>
         <Route path="/me" element={<GetMe />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
       </Route>
     </Routes>
   );

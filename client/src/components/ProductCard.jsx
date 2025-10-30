@@ -5,7 +5,7 @@ import { ShoppingCart } from "lucide-react";
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
-      <Link to={`/product/${productId}`}>
+      <Link to={`/products/${productId}`}>
        <figure className="h-48 overflow-hidden">
         <img src={ImageSrc} alt={Title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
       </figure>
