@@ -56,6 +56,30 @@ export const createProduct = async (req, res) => {
   }
 };
 
+export const getproductDetails = async(req, res) => {
+  try{
+    const product = await Product.findById(req.params.id);
+
+    if(!product){
+      res.status(404).json({
+        success: false,
+        message: "Product NOT Found!",
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product details",
+      product,
+    })
+  }catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server ERROR",
+    });
+  }
+}
+
 export const updateProduct = async (req, res) => {
   try {
     let { id } = req.params;
