@@ -1,30 +1,66 @@
-@import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@plugin "daisyui"{
-   themes: light --default;
- }
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@plugin "daisyui" {
+  themes: light --default;
+}
 
 @theme {
-  --font-poppins: 'Roboto', sans-serif;
+  /* Fonts */
+  --font-poppins: "Roboto", sans-serif;
+
+  /* 🎨 Color Palette */
+  --color-primary: #2563eb; /* Royal Blue → Primary (Buy now, active links) */
+  --color-success: #16a34a; /* Pigment Green → Success/Positive actions */
+  --color-accent: #dc2626; /* Rojo → Accent (Wishlist, sale highlights) */
+  --color-text: #111827; /* Rich Black → Text (Headings, primary content) */
+  --color-surface: #1f2937; /* Gunmetal → Surfaces (Navbar, Cards, Modals) */
+  --color-background: #f9fafb; /* Seasalt → Background */
+}
+
+body {
+  background-color: var(--color-background);
 }
 
 body {
   @apply font-poppins;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-
+/* 🔹 Inputs */
 input {
- @apply border rounded-xl py-2 px-3 outline-none w-full;
+  @apply border-l-1 border-[#3333]  py-2 px-3 outline-none w-full;
+  border-color: var(--color-surface);
 }
 
+/* 🔹 Primary Button */
 .btn {
-    @apply w-full py-3 px-2 bg-gradient-to-r from-[#273EBC] to-[#385AF6] text-white font-bold rounded-2xl cursor-pointer
+  @apply w-full py-3 px-2 text-white font-bold rounded-2xl cursor-pointer;
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    color-mix(in srgb, var(--color-primary) 80%, white)
+  );
 }
 
-.redirectionMsg p a{
-  @apply text-[#273EBC]
+/* 🔹 Redirection Links */
+.redirectionMsg p a {
+  color: var(--color-primary);
 }
 
-.product-btn{
-@apply w-full py-3 text-white rounded-xl  text-lg
+/* 🔹 Product Buttons (Generic) */
+.product-btn {
+  @apply w-full py-3 text-white rounded-xl text-lg;
+  background-color: var(--color-primary);
+}
+.buy-now-btn {
+  width: 97% !important;
+}
+
+/* 🔹 Wishlist & Cart Buttons */
+.buy-now-btn,
+.add-wishlist-btn,
+.add-cart-btn {
+  @apply flex justify-center items-center gap-2 py-2 px-3 text-lg w-full rounded hover:cursor-pointer  transition-all duration-200 hover:opacity-90 text-white border-none;
 }

@@ -2,16 +2,16 @@ import React from "react";
 
 const SearchInput = () => {
   return (
-    <label className="input">
+    <label className="input outline-none">
       <svg
-        className="h-[1em] opacity-50"
+        className="h-[1.7em] "
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
         <g
           strokeLinejoin="round"
           strokeLinecap="round"
-          strokeWidth="2.5"
+          strokeWidth="1.5"
           fill="none"
           stroke="currentColor"
         >

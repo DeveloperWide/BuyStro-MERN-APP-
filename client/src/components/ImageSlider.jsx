@@ -32,7 +32,7 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mx-2 my-8">
+    <div className="flex items-center justify-center mx-2 mt-2 mb-4">
       {/* Prev Button */}
       <button
         onClick={handlePrev}
@@ -46,7 +46,11 @@ const ImageSlider = () => {
           stroke="currentColor"
           strokeWidth="2"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
         </svg>
       </button>
 
