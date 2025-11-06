@@ -1,6 +1,4 @@
-import ProductImages from "../ProductImages";
-
-const LeftSection = ({ imageSrc, productDetails, handleCurrImage }) => {
+const LeftSection = ({ imageSrc, productDetails }) => {
   return (
     <div className="selected_img">
       <img
@@ -8,15 +6,6 @@ const LeftSection = ({ imageSrc, productDetails, handleCurrImage }) => {
         alt={productDetails.title}
         className="w-full rounded-lg shadow-md"
       />
-      {/* <div className="images hidden md:block mt-4">
-        {productDetails.images && (
-          <ProductImages
-            Images={productDetails.images}
-            Title={productDetails.title}
-            handleImage={handleCurrImage}
-          />
-        )}
-      </div> */}
     </div>
   );
 };

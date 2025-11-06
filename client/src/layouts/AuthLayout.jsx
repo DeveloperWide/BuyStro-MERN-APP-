@@ -8,7 +8,7 @@ const AuthLayout = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="auth-card relative w-full max-w-[400px] mx-auto rounded-2xl overflow-hidden shadow-2xl border border-black/10 backdrop-blur-xl animate-fadeIn">
-        <div className="w-full  flex flex-col justify-center items-center gap-6">
+        <div className="w-full  flex flex-col justify-center items-center gap-6 py-6 px-3">
           {/* Title */}
           <h2 className="text-2xl md:text-3xl font-semibold">
             {getTitle(location)}

@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import ProductImages from "../components/ProductImages";
 import RightSection from "../components/ProductDetails/RightSection";
 import LeftSection from "../components/ProductDetails/LeftSection";
 

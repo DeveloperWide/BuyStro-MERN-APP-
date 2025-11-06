@@ -1,7 +1,4 @@
 const ProductImages = ({ Images, Title, handleImage }) => {
-
-    console.log(Images);
-
   return (
     <div className="images flex gap-3 items-center">
       {Images && Images.length > 0 ? (
@@ -12,6 +9,7 @@ const ProductImages = ({ Images, Title, handleImage }) => {
               alt={Title}
               className="h-20 w-20 rounded"
               onClick={() => Images && handleImage(idx)}
+              key={idx}
             />
           );
         })

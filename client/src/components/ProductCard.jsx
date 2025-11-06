@@ -3,6 +3,11 @@ import { Link } from "react-router";
 import { ShoppingCart } from "lucide-react";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
+  const truncateText = (text, limit) => {
+    if (!text) return "";
+    return text.length > limit ? text.substring(0, limit) + "..." : text;
+  };
+
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
       <Link to={`/products/${productId}`}>
@@ -22,9 +27,11 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
         {/* Title & Description */}
         <div className="px-2 py-1">
           <h2 className="card-title text-lg font-semibold hover:text-primary py-1 text-text">
-            {Title}
+            {Title && truncateText(Title, 20)}
           </h2>
-          <p className="text-sm text-text py-1">{Description}</p>
+          <p className="text-sm text-text py-1">
+            {Description && truncateText(Description, 50)}
+          </p>
         </div>
       </Link>
 

@@ -2,7 +2,6 @@ import ProductImages from "../ProductImages";
 import ProductButtons from "../ProductButtons";
 
 const RightSection = ({ productDetails, setCurrImageIndex }) => {
-  console.log(productDetails);
   return (
     <div className="lg:col-span-2">
       <h2 className="text-2xl text-text font-bold">{productDetails.title}</h2>

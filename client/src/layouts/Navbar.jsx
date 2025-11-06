@@ -1,7 +1,21 @@
 import { ShoppingCart } from "lucide-react";
 import SearchInput from "../components/SearchInput";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/authSlice/authSlice";
+import axios from "axios";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+  const handleLogout = () => {
+    const confirmation = confirm("Do You Want to Logout..?");
+    if (confirmation) {
+      dispatch(logout());
+      axios.post("/api/auth/logout");
+    }
+  };
+
   return (
     <nav className="flex items-center z-20 justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b  bg-surface text-text relative transition-all">
       {/* BuyStro Logo */}
@@ -29,7 +43,10 @@ const Navbar = () => {
           </button>
         </div>
 
-        <a className="text-white text-2xl uppercase active:text-primary cursor-pointer font-semibold">
+        <a
+          className="text-white text-2xl uppercase active:text-primary cursor-pointer font-semibold"
+          onClick={handleLogout}
+        >
           Logout
         </a>
       </div>

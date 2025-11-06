@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
@@ -6,8 +6,29 @@ import GetMe from "./pages/GetMe.jsx";
 import { Products } from "./pages/Products.jsx";
 import PrivateLayout from "./layouts/PrivateLayout.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("/api/auth/refresh")
+      .then((res) => {
+        dispatch(setAccessToken(res.data.accessToken));
+        dispatch(setUser(res.data.user));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+  if (auth.accessToken === null) <Navigate to="/login" />;
+
   return (
     <Routes>
       {/* Public Routes */}
@@ -18,7 +39,7 @@ const App = () => {
 
       {/* Private Routes */}
       <Route element={<PrivateLayout />}>
-        <Route path="/me" element={<GetMe />} />
+        <Route path="/" element={<Navigate to="/products" />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
       </Route>
