@@ -1,13 +1,19 @@
-import express from 'express';
+import express from "express";
 const router = express.Router({});
-import { signup, login, getMe } from '../controllers/authController.js';
-import { isAuthenticated } from '../middlewares/isAuthenticated.js';
+import jwt from "jsonwebtoken";
+import {
+  signup,
+  login,
+  logout,
+  refreshToken,
+} from "../controllers/authController.js";
 
+router.post("/signup", signup);
 
-router.post('/signup', signup);
+router.post("/login", login);
 
-router.post('/login', login);
+router.get("/refresh", refreshToken);
 
-router.get('/me', isAuthenticated, getMe);
+router.post("/logout", logout);
 
 export default router;
