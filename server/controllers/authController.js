@@ -2,11 +2,6 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import { generateToken, sendRefreshToken } from "../lib/helper.js";
 
-const JWT_ACCESS =
-  process.env.JWT_ACCESS || "748342200ced2da87e30e104c935c39719c5f6d8";
-const JWT_REFRESH =
-  process.env.JWT_REFRESH || "d9fd1c4ddcecc467dfd4e7f0fd599b64c2900a07";
-
 export const signup = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -48,7 +43,10 @@ export const signup = async (req, res) => {
 
     const svdUser = await user.save();
     const { accessToken, refreshToken } = generateToken(svdUser._id.toString());
+
     sendRefreshToken(res, refreshToken);
+    svdUser.refreshToken = refreshToken;
+    await svdUser.save();
 
     return res.status(201).json({
       success: true,
@@ -95,9 +93,10 @@ export const login = async (req, res) => {
     const { refreshToken, accessToken } = generateToken(
       existingUser._id.toString()
     );
-    console.log("Access token : ", accessToken);
-    console.log("Refresh token : ", refreshToken);
     sendRefreshToken(res, refreshToken);
+
+    existingUser.refreshToken = refreshToken;
+    await existingUser.save();
 
     res.status(201).json({
       success: true,
@@ -116,7 +115,6 @@ export const login = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
-  console.log(refreshToken);
 
   if (!refreshToken) {
     return res.status(401).json({
@@ -127,15 +125,20 @@ export const refreshToken = async (req, res) => {
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
 
-    console.log(decoded);
+    const user = await User.findById(decoded.userId);
+
+    // you MUST add this check ↓
+    if (!user || user.refreshToken !== refreshToken) {
+      return res.status(403).json({
+        message: "Invalid Refresh Token",
+      });
+    }
 
     const newAccessToken = jwt.sign(
       { userId: decoded.userId },
       process.env.JWT_ACCESS,
       { expiresIn: "10m" }
     );
-
-    const user = await User.findById(decoded.userId);
 
     return res.status(200).json({
       user,
@@ -149,5 +152,34 @@ export const refreshToken = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  console.log("Refresh Token : ", refreshToken);
+  if (refreshToken) {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
+    if (decoded?.userId) {
+      const user = await User.findById(decoded.userId);
+      user.refreshToken = null;
+      const svdUser = await user.save();
+
+      console.log("With RefreshToken : ", user);
+      console.log("Saved User : ", svdUser);
+    } else {
+      return res.status(401).json({
+        success: true,
+        message: "Invalid Refresh Token",
+      });
+    }
+  } else {
+    return res.status(400).json({
+      success: false,
+      message: "No Account Found",
+    });
+  }
+
   res.clearCookie("refreshToken");
+
+  return res.status(200).json({
+    success: true,
+    message: "Successfully Logged Out.",
+  });
 };

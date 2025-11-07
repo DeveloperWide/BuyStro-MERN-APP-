@@ -30,7 +30,7 @@ const userSchema = new Schema(
       default: null,
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
@@ -49,6 +49,7 @@ userSchema.pre("save", async function (next) {
 userSchema.set("toJSON", {
   transform: function (doc, ret) {
     delete ret.password;
+    delete ret.refreshToken;
     return ret;
   },
 });

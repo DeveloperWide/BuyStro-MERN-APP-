@@ -10,11 +10,8 @@ export function getUserObj(id, name, email, role) {
 }
 
 export const generateToken = (userId) => {
-  console.log("userID: ", userId);
   const accessToken = jwt.sign({ userId }, JWT_ACCESS, { expiresIn: "10m" });
-  console.log("access :", accessToken);
   const refreshToken = jwt.sign({ userId }, JWT_REFRESH, { expiresIn: "7d" });
-  console.log("refresh :", refreshToken);
 
   return { refreshToken, accessToken };
 };

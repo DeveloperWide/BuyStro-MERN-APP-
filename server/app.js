@@ -9,6 +9,7 @@ dotenv.config();
 // Routes
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 app.use(express.json()); // Parse JSON Data
 app.use(express.urlencoded({ extended: true })); //Parse form Data
@@ -34,6 +35,7 @@ app.use(
 // routes api
 app.use("/api/auth/", authRoutes);
 app.use("/api/product/", productRoutes);
+app.use("/api/cart/", cartRoutes);
 
 app.listen(8080, () => {
   console.log("Server is running on PORT 8080");
