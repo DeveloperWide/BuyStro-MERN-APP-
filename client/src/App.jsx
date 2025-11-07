@@ -1,8 +1,7 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useNavigate } from "react-router";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
-import GetMe from "./pages/GetMe.jsx";
 import { Products } from "./pages/Products.jsx";
 import PrivateLayout from "./layouts/PrivateLayout.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
@@ -13,6 +12,8 @@ import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
 
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("/api/auth/refresh")
@@ -26,19 +27,23 @@ const App = () => {
   }, []);
 
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
-  if (auth.accessToken === null) <Navigate to="/login" />;
+
+  const isAuthorized = auth.accessToken !== null || auth.user !== null;
 
   return (
     <Routes>
       {/* Public Routes */}
-      <Route element={<AuthLayout />}>
+      <Route
+        element={isAuthorized ? <Navigate to="/products" /> : <AuthLayout />}
+      >
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
 
       {/* Private Routes */}
-      <Route element={<PrivateLayout />}>
+      <Route
+        element={isAuthorized ? <PrivateLayout /> : <Navigate to="/login" />}
+      >
         <Route path="/" element={<Navigate to="/products" />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />

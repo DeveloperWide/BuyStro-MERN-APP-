@@ -1,5 +1,7 @@
-import axios from "axios";
 import { useState } from "react";
+import { signup } from "../utils/authHelper";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     setFormData((prevFormData) => {
@@ -16,15 +20,8 @@ const Register = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/auth/signup", formData)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('token' , res.data.token);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(signup());
+    navigate("/products");
   };
 
   return (

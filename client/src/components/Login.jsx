@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../utils/authHelper";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Login = () => {
     password: "",
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     setFormData((prevFormData) => {
@@ -18,6 +20,7 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(login(formData));
+    navigate("/products");
   };
 
   return (
