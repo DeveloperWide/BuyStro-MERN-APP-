@@ -10,7 +10,7 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
 
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
-      <Link to={`/products/${productId}`}>
+      <Link to={`/product/${productId}`}>
         <figure className="h-48 overflow-hidden">
           <img
             src={ImageSrc}

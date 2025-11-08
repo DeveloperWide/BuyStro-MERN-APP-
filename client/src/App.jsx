@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
+import CartItems from "./pages/CartItems.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("/api/auth/refresh")
+      .get("/api/auth/refresh", { withCredentials: true })
       .then((res) => {
         dispatch(setAccessToken(res.data.accessToken));
         dispatch(setUser(res.data.user));
@@ -28,14 +29,12 @@ const App = () => {
 
   const auth = useSelector((state) => state.auth);
 
-  const isAuthorized = auth.accessToken !== null || auth.user !== null;
+  const isAuthorized = auth.accessToken !== null && auth.user !== null;
 
   return (
     <Routes>
       {/* Public Routes */}
-      <Route
-        element={isAuthorized ? <Navigate to="/products" /> : <AuthLayout />}
-      >
+      <Route element={isAuthorized ? <Navigate to="/" /> : <AuthLayout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
@@ -44,9 +43,9 @@ const App = () => {
       <Route
         element={isAuthorized ? <PrivateLayout /> : <Navigate to="/login" />}
       >
-        <Route path="/" element={<Navigate to="/products" />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/" element={<Products />} />
+        <Route path="/cartItems" element={<CartItems />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
       </Route>
     </Routes>
   );
