@@ -21,7 +21,7 @@ const Register = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(signup());
-    navigate("/products");
+    navigate("/");
   };
 
   return (

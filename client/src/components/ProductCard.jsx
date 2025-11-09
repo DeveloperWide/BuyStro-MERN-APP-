@@ -1,13 +1,9 @@
 import React from "react";
 import { Link } from "react-router";
 import { ShoppingCart } from "lucide-react";
+import { truncateText } from "../utils/helper";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
-  const truncateText = (text, limit) => {
-    if (!text) return "";
-    return text.length > limit ? text.substring(0, limit) + "..." : text;
-  };
-
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
       <Link to={`/product/${productId}`}>

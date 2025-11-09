@@ -20,7 +20,7 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(login(formData));
-    navigate("/products");
+    navigate("/");
   };
 
   return (

@@ -64,3 +64,7 @@ input {
 .add-cart-btn {
   @apply flex justify-center items-center gap-2 py-2 px-3 text-lg w-full rounded hover:cursor-pointer  transition-all duration-200 hover:opacity-90 text-white border-none;
 }
+
+th {
+  @apply text-start py-3;
+}
