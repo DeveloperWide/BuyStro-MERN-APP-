@@ -18,21 +18,24 @@ export const allItems = async (req, res) => {
 
 export const addItem = async (req, res) => {
   try {
-    const { title, price, quantity, image } = req.body;
-
-    if (!title || !price || !quantity || !image) {
+    const { Product, price, quantity } = req.body;
+    if (!price || !Product || !quantity) {
       return res.status(400).json({
         success: false,
         message: "All fields are Required",
       });
     }
-
+    console.log(req.body);
     const newItem = new Cart({
-      ...req.body,
+      items: [
+        {
+          ...req.body,
+        },
+      ],
     });
 
     const svdItem = await newItem.save();
-
+    console.log(svdItem);
     return res.status(201).json({
       success: true,
       svdItem,

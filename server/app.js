@@ -4,7 +4,7 @@ const app = express();
 import { connectDb } from "./db/connect.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Routes
 import authRoutes from "./routes/authRoutes.js";
