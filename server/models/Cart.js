@@ -3,6 +3,12 @@ const { Schema, model } = mongoose;
 
 const cartSchema = new Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      unique: true,
+    },
     items: [
       {
         Product: {
@@ -18,6 +24,14 @@ const cartSchema = new Schema(
   },
   { timestamps: true }
 );
+
+cartSchema.pre("save", function (next) {
+  this.totalPrice = this.items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  next();
+});
 
 const Cart = model("Cart", cartSchema);
 

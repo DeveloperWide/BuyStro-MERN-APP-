@@ -1,9 +1,15 @@
 import Cart from "../models/Cart.js";
+import User from "../models/User.js";
 
 export const allItems = async (req, res) => {
   try {
-    const cartItems = await Cart.find({});
-
+    if (!req.user.userId) {
+      return res.status(404).json({
+        success: false,
+        message: "404: NO User Found",
+      });
+    }
+    const cartItems = await Cart.findOne({ user: req.userId });
     return res.status(200).json({
       success: true,
       cartItems,
@@ -19,22 +25,39 @@ export const allItems = async (req, res) => {
 export const addItem = async (req, res) => {
   try {
     const { Product, price, quantity } = req.body;
+
     if (!price || !Product || !quantity) {
       return res.status(400).json({
         success: false,
         message: "All fields are Required",
       });
     }
-    console.log(req.body);
-    const newItem = new Cart({
-      items: [
-        {
-          ...req.body,
-        },
-      ],
-    });
 
-    const svdItem = await newItem.save();
+    let cart = await Cart.findOne({ user: req.user.userId });
+
+    console.log(cart);
+
+    if (!cart) {
+      console.log("Creating new Cart...");
+      cart = new Cart({
+        user: req.user.userId,
+        items: [req.body],
+      });
+    } else {
+      console.log("Updating Cart Items...");
+
+      const existingItem = cart.items.find(
+        (item) => item.Product.toString() === Product
+      );
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.items.push(req.body);
+      }
+    }
+
+    const svdItem = await cart.save();
     console.log(svdItem);
     return res.status(201).json({
       success: true,
@@ -53,6 +76,11 @@ export const updateQuantity = async (req, res) => {
   try {
     const { quantity } = req.body;
     const { id } = req.params;
+    const user = await User.findById(req.user.userId);
+    const cart = await Cart.findOne({ user });
+
+    const itemToBeUpdated = cart.items.find((item) => item.id == id);
+    console.log(itemToBeUpdated);
 
     if (!quantity) {
       return res.status(400).json({
