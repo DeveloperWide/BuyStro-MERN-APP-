@@ -7,11 +7,15 @@ import { truncateText } from "../utils/helper";
 import { Link } from "react-router";
 
 const CartItems = () => {
+  const auth = useSelector((state) => state.auth.accessToken);
   const dispatch = useDispatch();
-
   useEffect(() => {
     axios
-      .get("/api/cart/all")
+      .get("/api/cart/all", {
+        headers: {
+          Authorization: `Bearer ${auth}`,
+        },
+      })
       .then((res) => {
         console.log(res.data.cartItems);
         dispatch(setCart(res.data.cartItems));
@@ -21,7 +25,8 @@ const CartItems = () => {
       });
   }, []);
   const items = useSelector((state) => state.cart.items);
-  console.log(items);
+
+  if (!items) return <div>NO Items in Cart</div>;
   return (
     <table className="w-[99%] my-4 mx-1">
       <thead>
@@ -51,7 +56,8 @@ const CartItems = () => {
             <td className="pr-4">{item.quantity * item.price}</td>
           </tr>
         ))}
-      </tbody>
+      </tbody>{" "}
+      *
     </table>
   );
 };

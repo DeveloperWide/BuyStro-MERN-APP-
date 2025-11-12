@@ -31,7 +31,7 @@ const Navbar = () => {
         <Link to="/cartItems" className="relative cursor-pointer group">
           <i className="fa-solid fa-cart-shopping text-[28px] text-white transition-all duration-300 group-hover:text-primary"></i>
           <button className="absolute -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            {items.length}
+            {items ? items.length : 0}
           </button>
         </Link>
 

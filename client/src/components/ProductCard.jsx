@@ -3,6 +3,7 @@ import { ShoppingCart } from "lucide-react";
 import { addItem, truncateText } from "../utils/helper";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
+  const productDetails = { Product: productId, price: Price, quantity: 1 };
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
       <Link to={`/product/${productId}`}>
@@ -32,9 +33,7 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
 
       <button
         className="w-full py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 cursor-pointer active:scale-95 transition-all duration-200 flex gap-2 justify-center items-center"
-        onClick={() =>
-          addItem({ Product: productId, price: Price, quantity: 1 })
-        }
+        onClick={() => addItem(productDetails)}
       >
         <ShoppingCart /> Add to Cart
       </button>

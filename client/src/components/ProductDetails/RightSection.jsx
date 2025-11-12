@@ -26,7 +26,7 @@ const RightSection = ({ productDetails, setCurrImageIndex }) => {
           />
         )}
       </div>
-      <ProductButtons />
+      <ProductButtons Details={productDetails} />
     </div>
   );
 };

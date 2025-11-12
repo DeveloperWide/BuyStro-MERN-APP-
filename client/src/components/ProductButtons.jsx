@@ -1,7 +1,13 @@
-import React from "react";
 import { Heart, ShoppingCart, Zap } from "lucide-react";
+import { addItem } from "../utils/helper";
 
-const ProductButtons = () => {
+const ProductButtons = ({ Details }) => {
+  const productDetails = {
+    Product: Details._id,
+    price: Details.price,
+    quantity: 1,
+  };
+
   return (
     <div className="btns  flex flex-col px-3 py-3 justify-center items-center">
       {/* Buy Now Button */}
@@ -11,7 +17,12 @@ const ProductButtons = () => {
 
       {/* Cart & Wishlist Buttons */}
       <div className="flex justify-center items-center gap-2 px-2 w-full">
-        <button className="add-cart-btn bg-text hove">
+        <button
+          className="add-cart-btn bg-text hove"
+          // TODO: Update Quantity Based on Quantity provided by User
+
+          onClick={() => addItem(productDetails)}
+        >
           <ShoppingCart size={18} />
           Cart
         </button>
