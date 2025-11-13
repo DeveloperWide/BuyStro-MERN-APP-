@@ -6,7 +6,7 @@ import { Link } from "react-router";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
+  let items = useSelector((state) => state.cart?.cart?.items);
 
   const handleLogout = () => {
     const confirmation = confirm("Do You Want to Logout..?");

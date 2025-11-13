@@ -1,5 +1,5 @@
 import { Heart, ShoppingCart, Zap } from "lucide-react";
-import { addItem } from "../utils/helper";
+import { addItem } from "../services/cartService.js";
 
 const ProductButtons = ({ Details }) => {
   const productDetails = {

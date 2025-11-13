@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ShoppingCart } from "lucide-react";
-import { addItem, truncateText } from "../utils/helper";
+import { addItem } from "../services/cartService";
+import { truncateText } from "../utils/helper";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
   const productDetails = { Product: productId, price: Price, quantity: 1 };

@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
@@ -13,7 +13,6 @@ import CartItems from "./pages/CartItems.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
