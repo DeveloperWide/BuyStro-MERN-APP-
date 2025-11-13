@@ -9,10 +9,13 @@ export const allItems = async (req, res) => {
         message: "404: NO User Found",
       });
     }
-    const cartItems = await Cart.findOne({ user: req.userId });
+    const cart = await Cart.findOne({ user: req.user.userId }).populate({
+      path: "items.Product",
+      select: "_id images title",
+    });
     return res.status(200).json({
       success: true,
-      cartItems,
+      cart,
     });
   } catch (err) {
     res.status(500).json({
