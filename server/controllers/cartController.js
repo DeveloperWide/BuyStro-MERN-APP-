@@ -54,7 +54,12 @@ export const addItem = async (req, res) => {
       );
 
       if (existingItem) {
-        existingItem.quantity += quantity;
+        return res.status(200).json({
+          success: true,
+          exists: true,
+          item: existingItem,
+          message: "Item Already Exist",
+        });
       } else {
         cart.items.push(req.body);
       }
@@ -64,7 +69,7 @@ export const addItem = async (req, res) => {
     console.log(svdItem);
     return res.status(201).json({
       success: true,
-      svdItem,
+      item: svdItem,
       message: "Item Added to cart Successfully.",
     });
   } catch (err) {
@@ -77,39 +82,56 @@ export const addItem = async (req, res) => {
 
 export const updateQuantity = async (req, res) => {
   try {
-    const { quantity } = req.body;
+    const { inc } = req.body;
     const { id } = req.params;
-    const user = await User.findById(req.user.userId);
-    const cart = await Cart.findOne({ user });
 
-    const itemToBeUpdated = cart.items.find((item) => item.id == id);
-    console.log(itemToBeUpdated);
-
-    if (!quantity) {
-      return res.status(400).json({
+    if (inc === undefined) {
+      return res.status(404).json({
         success: false,
-        message: "Quantity is required",
+        message: "inc (true/false) is required",
       });
     }
 
-    const updatedCartItem = await Cart.findByIdAndUpdate(
-      id,
-      {
-        quantity,
-      },
-      { new: true }
-    );
+    // Find User
+    const user = await User.findById(req.user.userId);
 
-    if (!updatedCartItem) {
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "404: User not found",
+      });
+    }
+
+    // Find Cart
+    const cart = await Cart.findOne({ user });
+
+    if (!cart) {
+      return res.status(404).json({
+        success: false,
+        message: "404: Cart Not Found",
+      });
+    }
+
+    const itemToBeUpdated = cart.items.find((item) => item._id == id);
+
+    if (!itemToBeUpdated) {
       return res.status(404).json({
         success: false,
         message: "404: Item NOT Found",
       });
     }
 
+    if (inc) {
+      itemToBeUpdated.quantity += 1;
+    } else {
+      itemToBeUpdated.quantity -= 1;
+    }
+
+    await cart.save();
+
     return res.status(200).json({
       success: false,
-      updatedCartItem,
+      updatedItem: itemToBeUpdated,
       message: "Quantity Successfully updated.",
     });
   } catch (err) {
@@ -124,21 +146,46 @@ export const removeItem = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deltedItem = await Cart.findByIdAndDelete(id);
+    // Find user
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
-    if (!deltedItem) {
+    // Find cart
+    const cart = await Cart.findOne({ user });
+    if (!cart) {
+      return res.status(404).json({
+        success: false,
+        message: "Cart not found",
+      });
+    }
+
+    // Find the item to delete
+    const deletedItem = cart.items.find((item) => item._id == id);
+
+    if (!deletedItem) {
       return res.status(404).json({
         success: false,
         message: "404: Item NOT Found",
       });
     }
 
+    // Remove it
+    cart.items = cart.items.filter((item) => item._id != id);
+
+    await cart.save();
+
     return res.status(200).json({
       success: true,
-      removedItem: deltedItem,
+      removedItem: deletedItem,
       message: "Item Removed Successfully.",
     });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",

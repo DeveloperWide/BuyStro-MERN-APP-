@@ -2,9 +2,25 @@ import { Link } from "react-router";
 import { ShoppingCart } from "lucide-react";
 import { addItem } from "../services/cartService";
 import { truncateText } from "../utils/helper";
+import { addItemLocal } from "../redux/cartSlice/cartSlice";
+import { useDispatch } from "react-redux";
 
 const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
+  const dispatch = useDispatch();
   const productDetails = { Product: productId, price: Price, quantity: 1 };
+
+  const handleAddItem = async (details) => {
+    const data = await addItem(details);
+    if (data.data.success) {
+      if (data.data.exists) {
+        console.log("NOT adding, Product Already in Card");
+      } else {
+        dispatch(addItemLocal(data.data.item));
+      }
+      // ;
+    }
+  };
+
   return (
     <div className="card bg-base-100 w-96 sm:w-64 md:w-72 shadow-sm rounded-lg overflow-hidden">
       <Link to={`/product/${productId}`}>
@@ -34,7 +50,7 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
 
       <button
         className="w-full py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 cursor-pointer active:scale-95 transition-all duration-200 flex gap-2 justify-center items-center"
-        onClick={() => addItem(productDetails)}
+        onClick={() => handleAddItem(productDetails)}
       >
         <ShoppingCart /> Add to Cart
       </button>

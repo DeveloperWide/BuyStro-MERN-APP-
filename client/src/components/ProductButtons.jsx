@@ -1,11 +1,27 @@
 import { Heart, ShoppingCart, Zap } from "lucide-react";
 import { addItem } from "../services/cartService.js";
+import { addItemLocal } from "../redux/cartSlice/cartSlice.js";
+import { useDispatch } from "react-redux";
 
 const ProductButtons = ({ Details }) => {
+  const dispatch = useDispatch();
   const productDetails = {
     Product: Details._id,
     price: Details.price,
     quantity: 1,
+  };
+
+  const handleAddItem = async (details) => {
+    const data = await addItem(details);
+    if (data.data.success) {
+      console.log(data);
+      if (data.data.exists) {
+        console.log("NOT adding, Product Already in Card");
+      } else {
+        dispatch(addItemLocal(data.data.item));
+      }
+      // ;
+    }
   };
 
   return (
@@ -21,7 +37,7 @@ const ProductButtons = ({ Details }) => {
           className="add-cart-btn bg-text hove"
           // TODO: Update Quantity Based on Quantity provided by User
 
-          onClick={() => addItem(productDetails)}
+          onClick={() => handleAddItem(productDetails)}
         >
           <ShoppingCart size={18} />
           Cart
