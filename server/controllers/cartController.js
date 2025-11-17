@@ -1,7 +1,7 @@
 import Cart from "../models/Cart.js";
 import User from "../models/User.js";
 
-export const allItems = async (req, res) => {
+/* export const allItems = async (req, res) => {
   try {
     if (!req.user.userId) {
       return res.status(404).json({
@@ -23,7 +23,7 @@ export const allItems = async (req, res) => {
       message: "Internal Server Eror",
     });
   }
-};
+}; */
 
 export const addItem = async (req, res) => {
   try {
@@ -38,38 +38,41 @@ export const addItem = async (req, res) => {
 
     let cart = await Cart.findOne({ user: req.user.userId });
 
-    console.log(cart);
-
     if (!cart) {
-      console.log("Creating new Cart...");
-      cart = new Cart({
-        user: req.user.userId,
-        items: [req.body],
+      return res.status(404).json({
+        success: false,
+        message: "404: Cart NOT Found!, Login 0r Signup.",
       });
-    } else {
-      console.log("Updating Cart Items...");
-
-      const existingItem = cart.items.find(
-        (item) => item.Product.toString() === Product
-      );
-
-      if (existingItem) {
-        return res.status(200).json({
-          success: true,
-          exists: true,
-          item: existingItem,
-          message: "Item Already Exist",
-        });
-      } else {
-        cart.items.push(req.body);
-      }
     }
 
+    const existingItem = cart.items.find(
+      (item) => item.Product.toString() === Product
+    );
+
+    if (existingItem) {
+      return res.status(200).json({
+        success: true,
+        exists: true,
+        item: existingItem,
+        message: "Item Already Exist",
+      });
+    }
+
+    cart.items.push(req.body);
+
     const svdItem = await cart.save();
-    console.log(svdItem);
+
+    const item = svdItem.items.find(
+      (item) => item.Product.toString() === Product
+    );
+    await item.populate({
+      path: "Product",
+      select: "_id images title",
+    });
+
     return res.status(201).json({
       success: true,
-      item: svdItem,
+      item,
       message: "Item Added to cart Successfully.",
     });
   } catch (err) {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import bcrypt from "bcrypt";
 const { Schema, model } = mongoose;
 
@@ -28,6 +28,10 @@ const userSchema = new Schema(
     refreshToken: {
       type: String,
       default: null,
+    },
+    cart: {
+      type: Schema.Types.ObjectId,
+      ref: "Cart",
     },
   },
   { timestamps: true }

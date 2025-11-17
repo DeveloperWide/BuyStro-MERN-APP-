@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { generateToken, sendRefreshToken } from "../lib/helper.js";
+import { createCart, generateToken, sendRefreshToken } from "../lib/helper.js";
+import Cart from "../models/Cart.js";
 
 export const signup = async (req, res) => {
   try {
@@ -46,12 +47,21 @@ export const signup = async (req, res) => {
 
     sendRefreshToken(res, refreshToken);
     svdUser.refreshToken = refreshToken;
+
+    //  TODO: Create Cart Just After Login & Signup
+    const cart = (await createCart(user._id)).populate({
+      path: "items.Product",
+      select: "_id title images",
+    });
+
+    svdUser.cart = cart._id;
     await svdUser.save();
 
     return res.status(201).json({
       success: true,
       accessToken,
       user: svdUser,
+      cart,
       message: "User created Successfully",
     });
   } catch (err) {
@@ -96,12 +106,21 @@ export const login = async (req, res) => {
     sendRefreshToken(res, refreshToken);
 
     existingUser.refreshToken = refreshToken;
-    await existingUser.save();
+    const user = await existingUser.save();
+
+    const cart = await Cart.findOne({ user: user._id }).populate({
+      path: "items.Product",
+      select: "_id title images",
+    });
+    if (!cart) {
+      cart = await createCart(user._id);
+    }
 
     res.status(201).json({
       success: true,
       accessToken,
-      user: existingUser,
+      user,
+      cart,
       message: "You're successfully log in.",
     });
   } catch (err) {

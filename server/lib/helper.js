@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import Cart from "../models/Cart.js";
 
 const JWT_ACCESS =
   process.env.JWT_ACCESS || "748342200ced2da87e30e104c935c39719c5f6d8";
@@ -22,5 +23,12 @@ export const sendRefreshToken = (res, refreshToken) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+};
+
+export const createCart = async (user) => {
+  return await Cart.create({
+    user,
+    items: [],
   });
 };
