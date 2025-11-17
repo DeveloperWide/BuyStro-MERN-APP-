@@ -20,7 +20,7 @@ const Register = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(signup());
+    dispatch(signup(formData));
     navigate("/");
   };
 

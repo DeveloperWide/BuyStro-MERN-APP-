@@ -20,7 +20,7 @@ const cartSlice = createSlice({
 
     removeItemLocal: (state, action) => {
       // action.payload = id
-      state.cart.items = state.items.filter(
+      state.cart.items = state.cart.items.filter(
         (item) => item._id !== action.payload
       );
     },

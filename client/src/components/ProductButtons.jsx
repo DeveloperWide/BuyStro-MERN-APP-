@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 const ProductButtons = ({ Details }) => {
   const dispatch = useDispatch();
+
   const productDetails = {
     Product: Details._id,
     price: Details.price,
@@ -16,8 +17,9 @@ const ProductButtons = ({ Details }) => {
     if (data.data.success) {
       console.log(data);
       if (data.data.exists) {
-        console.log("NOT adding, Product Already in Card");
+        console.log("NOT adding, Product Already in Cart");
       } else {
+        console.log(data.data.item);
         dispatch(addItemLocal(data.data.item));
       }
       // ;
@@ -35,8 +37,6 @@ const ProductButtons = ({ Details }) => {
       <div className="flex justify-center items-center gap-2 px-2 w-full">
         <button
           className="add-cart-btn bg-text hove"
-          // TODO: Update Quantity Based on Quantity provided by User
-
           onClick={() => handleAddItem(productDetails)}
         >
           <ShoppingCart size={18} />

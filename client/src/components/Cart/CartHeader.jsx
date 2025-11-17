@@ -1,11 +1,11 @@
 const CartHeader = () => {
   return (
     <thead>
-      <tr>
+      <tr className="border-b">
         <th></th>
-        <th>Product</th>
-        <th className="ps-4">Price</th>
-        <th className="ps-4">Quantity</th>
+        <th className="ps-6">Product</th>
+        <th className="ps-4 border-l">Price</th>
+        <th className="ps-4 border-l">Quantity</th>
       </tr>
     </thead>
   );

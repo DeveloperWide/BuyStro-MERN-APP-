@@ -1,36 +1,25 @@
 import { Minus, Plus, Trash, X } from "lucide-react";
 import { truncateText } from "../../utils/helper.jsx";
-import { data, Link } from "react-router";
+import { Link } from "react-router";
 import { deleteItem, updateQuantity } from "../../services/cartService.js";
-import { useDispatch, useSelector } from "react-redux";
-import { updateItemLocal } from "../../redux/cartSlice/cartSlice.js";
+import { useDispatch } from "react-redux";
+import {
+  removeItemLocal,
+  updateItemLocal,
+} from "../../redux/cartSlice/cartSlice.js";
 
 const CartBody = ({ CartItems }) => {
   const dispatch = useDispatch();
-  const decQuantity = {
-    quantity: 1,
-    inc: false,
-  };
-
-  const incQuantity = {
-    quantity: 1,
-    inc: true,
-  };
 
   const handleDecQuantity = async (id, obj) => {
     if (obj.quantity === 1) {
-      deleteItem(id)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      removeItemHandler(id);
     } else {
       updateQuantity(id, obj)
         .then((res) => {
-          console.log(res.data.data);
-          dispatch(updateItemLocal(id, res.data.updatedItem.quantity));
+          dispatch(
+            updateItemLocal({ id, quantity: res.data.updatedItem.quantity })
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -40,13 +29,34 @@ const CartBody = ({ CartItems }) => {
   const handleIncQuantity = async (id, obj) => {
     updateQuantity(id, obj)
       .then((res) => {
-        console.log(res.data.updatedItem.quantity);
-        dispatch(updateItemLocal(id, res.data.updatedItem.quantity));
+        dispatch(
+          updateItemLocal({ id, quantity: res.data.updatedItem.quantity })
+        );
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const removeItemHandler = (id) => {
+    deleteItem(id)
+      .then((res) => {
+        dispatch(removeItemLocal(id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  if (!CartItems || CartItems.length === 0)
+    return (
+      <tr className="h-[430px]">
+        <td colSpan={4} className="text-center font-semibold py-10 ">
+          No ITEMS in the Cart
+        </td>
+      </tr>
+    );
+
   return (
     <tbody>
       {CartItems &&
@@ -87,7 +97,12 @@ const CartBody = ({ CartItems }) => {
               <div className="border-3 border-amber-300 text-black font-semibold flex justify-center items-center gap-4 w-23 py-1 rounded-full">
                 <button
                   className="cursor-pointer"
-                  onClick={() => handleDecQuantity(item._id, decQuantity)}
+                  onClick={() =>
+                    handleDecQuantity(item._id, {
+                      quantity: item.quantity,
+                      inc: false,
+                    })
+                  }
                 >
                   {item.quantity > 1 ? (
                     <Minus size={16} strokeWidth={3} />
@@ -98,7 +113,12 @@ const CartBody = ({ CartItems }) => {
                 <span className="text-sm">{item.quantity}</span>
                 <button
                   className="cursor-pointer"
-                  onClick={() => handleIncQuantity(item._id, incQuantity)}
+                  onClick={() =>
+                    handleIncQuantity(item._id, {
+                      quantity: item.quantity,
+                      inc: true,
+                    })
+                  }
                 >
                   <Plus size={16} strokeWidth={3} />
                 </button>
