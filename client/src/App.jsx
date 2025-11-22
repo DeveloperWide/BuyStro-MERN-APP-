@@ -10,6 +10,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
 import CartItems from "./pages/CartItems.jsx";
+import { setCart } from "./redux/cartSlice/cartSlice.js";
 
 const App = () => {
   const dispatch = useDispatch();

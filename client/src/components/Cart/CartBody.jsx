@@ -50,11 +50,13 @@ const CartBody = ({ CartItems }) => {
 
   if (!CartItems || CartItems.length === 0)
     return (
-      <tr className="h-[430px]">
-        <td colSpan={4} className="text-center font-semibold py-10 ">
-          No ITEMS in the Cart
-        </td>
-      </tr>
+      <tbody>
+        <tr className="h-[430px]">
+          <td colSpan={4} className="text-center font-semibold py-10 ">
+            No ITEMS in the Cart
+          </td>
+        </tr>
+      </tbody>
     );
 
   return (

@@ -7,6 +7,11 @@ import CartHeader from "../components/Cart/CartHeader.jsx";
 
 const CartItems = () => {
   const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    console.log(auth);
+  }, []);
 
   console.log(cart);
   if (!cart) return <div>No Cart</div>;

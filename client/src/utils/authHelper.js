@@ -9,7 +9,7 @@ export const login = (formData) => async (dispatch) => {
       console.log("Signup : ", res.data);
       dispatch(setAccessToken(res.data.accessToken));
       dispatch(setUser(res.data.user));
-      dispatch(res.data.cart);
+      dispatch(setCart(res.data.cart));
     })
     .catch((err) => {
       console.log(err);

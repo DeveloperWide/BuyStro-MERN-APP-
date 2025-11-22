@@ -11,13 +11,14 @@ const ProductCard = ({ Title, Description, ImageSrc, productId, Price }) => {
 
   const handleAddItem = async (details) => {
     const data = await addItem(details);
+    console.log(data);
     if (data.data.success) {
       if (data.data.exists) {
-        console.log("NOT adding, Product Already in Card");
+        console.log("NOT adding, Product Already in Cart");
       } else {
+        console.log(data);
         dispatch(addItemLocal(data.data.item));
       }
-      // ;
     }
   };
 
