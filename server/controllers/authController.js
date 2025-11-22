@@ -145,6 +145,7 @@ export const refreshToken = async (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
 
     const user = await User.findById(decoded.userId);
+    console.log(user);
 
     // you MUST add this check ↓
     if (!user || user.refreshToken !== refreshToken) {

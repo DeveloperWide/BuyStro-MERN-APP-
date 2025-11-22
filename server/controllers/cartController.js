@@ -62,20 +62,18 @@ export const addItem = async (req, res) => {
 
     const svdItem = await cart.save();
 
-    const item = svdItem.items.find(
+    const idx = svdItem.items.findIndex(
       (item) => item.Product.toString() === Product
     );
-    await item.populate({
-      path: "Product",
-      select: "_id images title",
-    });
+    await svdItem.populate(`items.${idx}.Product`);
 
     return res.status(201).json({
       success: true,
-      item,
+      item: svdItem.items[idx],
       message: "Item Added to cart Successfully.",
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
