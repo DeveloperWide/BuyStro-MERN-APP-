@@ -29,16 +29,46 @@ const Navbar = () => {
       <div className="flex items-center gap-8">
         {/* 🛒 Cart Icon */}
         <Link to="/cartItems" className="relative cursor-pointer group">
-          <i className="fa-solid fa-cart-shopping text-[28px] text-white transition-all duration-300 group-hover:text-primary"></i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            color="white"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="icon icon-tabler icons-tabler-filled icon-tabler-shopping-cart"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" />
+          </svg>
+
           <button className="absolute -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] rounded-full flex items-center justify-center">
             {items ? items.length : 0}
           </button>
         </Link>
 
         {/* ❤️ Heart Icon */}
-        <div className="relative cursor-pointer group">
-          <i className="fa-solid fa-heart text-[28px] text-white transition-all duration-300 group-hover:text-primary"></i>
-          <button className="absolute -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] rounded-full flex items-center justify-center">
+        <div className="relative group">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            color="pink"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-bag-heart text-[22px]"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M11.5 21h-2.926a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304h11.339a2 2 0 0 1 1.977 2.304c-.057 .368 -.1 .644 -.127 .828" />
+            <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
+            <path d="M18 22l3.35 -3.284a2.143 2.143 0 0 0 .005 -3.071a2.242 2.242 0 0 0 -3.129 -.006l-.224 .22l-.223 -.22a2.242 2.242 0 0 0 -3.128 -.006a2.143 2.143 0 0 0 -.006 3.071l3.355 3.296z" />
+          </svg>
+          {/* <i className="fa-solid fa-heart text-[22px] text-white transition-all duration-300 group-hover:text-black group-hover:amimate-pulse"></i> */}
+          <button className="absolute  inset-0 rounded-2xl scale-90  -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] flex items-center justify-center shadow-md">
             3
           </button>
         </div>

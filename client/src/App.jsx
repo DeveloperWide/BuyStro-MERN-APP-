@@ -6,21 +6,22 @@ import { Products } from "./pages/Products.jsx";
 import PrivateLayout from "./layouts/PrivateLayout.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import { useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
 import CartItems from "./pages/CartItems.jsx";
 import { setCart } from "./redux/cartSlice/cartSlice.js";
+import axiosInstance from "./utils/axiosInstance.js";
 
 const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    axios
-      .get("/api/auth/refresh", { withCredentials: true })
+    axiosInstance
+      .get("/auth/refresh")
       .then((res) => {
+        console.log(res);
         dispatch(setAccessToken(res.data.accessToken));
         dispatch(setUser(res.data.user));
+        // dispatch(setCart(res.data.cart));
       })
       .catch((err) => {
         console.log(err);
@@ -49,6 +50,7 @@ const App = () => {
       </Route>
     </Routes>
   );
+  hello;
 };
 
 export default App;

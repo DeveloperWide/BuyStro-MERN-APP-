@@ -3,6 +3,7 @@ import { store } from "../redux/store.js";
 
 const axiosInstance = axios.create({
   baseURL: "/api",
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {
