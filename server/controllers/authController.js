@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 import { createCart, generateToken, sendRefreshToken } from "../lib/helper.js";
 import Cart from "../models/Cart.js";
 
+const JWT_ACCESS =
+  process.env.JWT_ACCESS || "748342200ced2da87e30e104c935c39719c5f6d8";
+
 export const signup = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -134,6 +137,7 @@ export const login = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
+  console.log(refreshToken);
 
   if (!refreshToken) {
     return res.status(401).json({
@@ -145,7 +149,6 @@ export const refreshToken = async (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
 
     const user = await User.findById(decoded.userId);
-    console.log(user);
 
     // you MUST add this check ↓
     if (!user || user.refreshToken !== refreshToken) {
@@ -154,11 +157,9 @@ export const refreshToken = async (req, res) => {
       });
     }
 
-    const newAccessToken = jwt.sign(
-      { userId: decoded.userId },
-      process.env.JWT_ACCESS,
-      { expiresIn: "10m" }
-    );
+    const newAccessToken = jwt.sign({ userId: decoded.userId }, JWT_ACCESS, {
+      expiresIn: "10m",
+    });
 
     return res.status(200).json({
       user,
