@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchInput = () => {
   return (
-    <label className="input outline-none">
+    <label className="input outline-none w-[70%] pr-[10px] md:pr-0 md:w-[50%]">
       <svg
         className="h-[1.7em] "
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@ const SearchInput = () => {
           <path d="m21 21-4.3-4.3"></path>
         </g>
       </svg>
-      <input type="search" required placeholder="Search" />
+      <input type="search" required placeholder="Search buystro.com" />
     </label>
   );
 };

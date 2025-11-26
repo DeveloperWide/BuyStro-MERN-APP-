@@ -19,20 +19,22 @@ const Navbar = () => {
   return (
     <nav className="flex items-center z-20 justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b  bg-surface text-text relative transition-all">
       {/* BuyStro Logo */}
-      <div className="logo flex gap-1 justify-center items-center">
-        <img src="/shopping-cart.png" alt="BuyStro Logo" className="h-10" />
-        <img src="/BuyStro.png" alt="BuyStro Logo" className="h-8 self-end" />
+      <div className="logo hidden md:flex gap-1 justify-center items-center">
+        <img
+          src="/BuyStro.png"
+          alt="BuyStro Logo"
+          className="h-20 self-end hidden lg:block "
+        />
       </div>
 
       <SearchInput />
-
       <div className="flex items-center gap-8">
         {/* 🛒 Cart Icon */}
-        <Link to="/cartItems" className="relative cursor-pointer group">
+        <Link to="/cart" className="relative cursor-pointer group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="30"
+            height="30"
             color="white"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -48,11 +50,11 @@ const Navbar = () => {
         </Link>
 
         {/* ❤️ Heart Icon */}
-        <div className="relative group">
+        <Link to="/wishlist" className="relative group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="35"
+            height="35"
             viewBox="0 0 24 24"
             fill="none"
             color="pink"
@@ -67,11 +69,10 @@ const Navbar = () => {
             <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
             <path d="M18 22l3.35 -3.284a2.143 2.143 0 0 0 .005 -3.071a2.242 2.242 0 0 0 -3.129 -.006l-.224 .22l-.223 -.22a2.242 2.242 0 0 0 -3.128 -.006a2.143 2.143 0 0 0 -.006 3.071l3.355 3.296z" />
           </svg>
-          {/* <i className="fa-solid fa-heart text-[22px] text-white transition-all duration-300 group-hover:text-black group-hover:amimate-pulse"></i> */}
-          <button className="absolute  inset-0 rounded-2xl scale-90  -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] flex items-center justify-center shadow-md">
+          <button className="absolute  rounded-2xl  -top-0 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] flex items-center justify-center shadow-md">
             3
           </button>
-        </div>
+        </Link>
 
         <a
           className="text-white text-2xl uppercase active:text-primary cursor-pointer font-semibold"

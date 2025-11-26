@@ -59,6 +59,8 @@ const CartBody = ({ CartItems }) => {
       </tbody>
     );
 
+  console.log(CartItems);
+
   return (
     <tbody>
       {CartItems &&
@@ -92,7 +94,7 @@ const CartBody = ({ CartItems }) => {
             <td className="text-sm font-mono border-l text-center">
               ₹
               <span className="text-lg sm:text-xl md:text-2xl font-semibold">
-                {item.price}
+                {item.price * item.quantity}
               </span>
             </td>
             <td className="border-l text-center ps-4">

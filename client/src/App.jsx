@@ -11,6 +11,7 @@ import { setAccessToken, setUser } from "./redux/authSlice/authSlice.js";
 import CartItems from "./pages/CartItems.jsx";
 import { setCart } from "./redux/cartSlice/cartSlice.js";
 import axiosInstance from "./utils/axiosInstance.js";
+import Wishlist from "./pages/Wishlist.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,10 +19,9 @@ const App = () => {
     axiosInstance
       .get("/auth/refresh")
       .then((res) => {
-        console.log(res);
         dispatch(setAccessToken(res.data.accessToken));
         dispatch(setUser(res.data.user));
-        // dispatch(setCart(res.data.cart));
+        dispatch(setCart(res.data.cart));
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +45,8 @@ const App = () => {
         element={isAuthorized ? <PrivateLayout /> : <Navigate to="/login" />}
       >
         <Route path="/" element={<Products />} />
-        <Route path="/cartItems" element={<CartItems />} />
+        <Route path="/cart" element={<CartItems />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Route>
     </Routes>
