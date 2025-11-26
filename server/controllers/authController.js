@@ -137,7 +137,6 @@ export const login = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
-  console.log(refreshToken);
 
   if (!refreshToken) {
     return res.status(401).json({
@@ -157,12 +156,18 @@ export const refreshToken = async (req, res) => {
       });
     }
 
+    const cart = await Cart.findOne({ user: user._id }).populate({
+      path: "items.Product",
+      select: "_id images title",
+    });
+
     const newAccessToken = jwt.sign({ userId: decoded.userId }, JWT_ACCESS, {
       expiresIn: "10m",
     });
 
     return res.status(200).json({
       user,
+      cart,
       accessToken: newAccessToken,
     });
   } catch (err) {
