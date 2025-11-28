@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/authSlice/authSlice";
 import axios from "axios";
 import { Link } from "react-router";
+import { LogOut } from "lucide-react";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -17,15 +18,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center z-20 justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b  bg-surface text-text relative transition-all">
+    <nav className="flex items-center z-20 justify-between px-2 md:px-16 lg:px-24 xl:px-32 py-4 border-b  bg-surface text-text relative transition-all">
       {/* BuyStro Logo */}
-      <div className="logo hidden md:flex gap-1 justify-center items-center">
-        <img
-          src="/BuyStro.png"
-          alt="BuyStro Logo"
-          className="h-20 self-end hidden lg:block "
-        />
-      </div>
+      <Link to="/" className="logo pr-5 flex gap-1">
+        <img src="/BuyStro.png" alt="BuyStro Logo" className="h-13 " />
+        <h1 className="self-end  hidden md:block text-3xl text-[#ff9648]">
+          uyStro
+        </h1>
+      </Link>
 
       <SearchInput />
       <div className="flex items-center gap-8">
@@ -38,7 +38,7 @@ const Navbar = () => {
             color="white"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="icon icon-tabler icons-tabler-filled icon-tabler-shopping-cart"
+            className="icon icon-tabler hover:text-[#ff9648] icons-tabler-filled icon-tabler-shopping-cart"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" />
@@ -50,7 +50,7 @@ const Navbar = () => {
         </Link>
 
         {/* ❤️ Heart Icon */}
-        <Link to="/wishlist" className="relative group">
+        <Link to="/wishlist" className="relative group hidden lg:block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="35"
@@ -62,7 +62,7 @@ const Navbar = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-bag-heart text-[22px]"
+            className="icon  icon-tabler hover:text-[#ff9648] icons-tabler-outline icon-tabler-shopping-bag-heart text-[22px]"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M11.5 21h-2.926a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304h11.339a2 2 0 0 1 1.977 2.304c-.057 .368 -.1 .644 -.127 .828" />
@@ -75,10 +75,11 @@ const Navbar = () => {
         </Link>
 
         <a
-          className="text-white text-2xl uppercase active:text-primary cursor-pointer font-semibold"
+          className="text-white text-2xl hidden md:block hover:text-red-600 uppercase active:text-primary cursor-pointer font-semibold"
           onClick={handleLogout}
+          title="LogOut"
         >
-          Logout
+          <LogOut size={28} strokeWidth={3} />
         </a>
       </div>
     </nav>

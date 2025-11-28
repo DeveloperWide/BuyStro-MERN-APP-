@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchInput = () => {
   return (
-    <label className="input outline-none w-[70%] pr-[10px] md:pr-0 md:w-[50%]">
+    <label className="input outline-offset-1 outline-[#ff9648] focus:outline shadow-[#414d5e] shadow-xl/30 w-[70%] pr-[10px] md:pr-0 md:w-[50%]">
       <svg
         className="h-[1.7em] "
         xmlns="http://www.w3.org/2000/svg"
