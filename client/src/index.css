@@ -68,3 +68,16 @@ input {
 th {
   @apply text-start py-3;
 }
+
+/* Styling Navbar */
+
+.navbar {
+  @apply flex items-center z-20 justify-between px-2 md:px-16 lg:px-24 xl:px-32 py-4  text-text sticky top-0 transition-all;
+  background-color: #1f2937;
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+.navbar.scrolled {
+  background-color: #1f29372f;
+  backdrop-filter: blur(3px);
+}

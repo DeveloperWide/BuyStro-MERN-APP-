@@ -4,8 +4,10 @@ import { logout } from "../redux/authSlice/authSlice";
 import axios from "axios";
 import { Link } from "react-router";
 import { LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const dispatch = useDispatch();
   let items = useSelector((state) => state.cart?.cart?.items);
 
@@ -17,8 +19,18 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="flex items-center z-20 justify-between px-2 md:px-16 lg:px-24 xl:px-32 py-4 border-b  bg-surface text-text relative transition-all">
+    <nav className={`${isScrolled ? "navbar scrolled" : "navbar"}`}>
       {/* BuyStro Logo */}
       <Link to="/" className="logo pr-5 flex gap-1">
         <img src="/BuyStro.png" alt="BuyStro Logo" className="h-13 " />
@@ -44,9 +56,15 @@ const Navbar = () => {
             <path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" />
           </svg>
 
-          <button className="absolute -top-1 -right-2 text-[11px] font-semibold text-[#F4E9D7] bg-text w-[18px] h-[18px] rounded-full flex items-center justify-center">
-            {items ? items.length : 0}
-          </button>
+          {items && (
+            <button
+              className={` absolute -top-1 -right-2 text-[11px] font-semibold ${
+                items.length > 9 ? "text-pink-300" : "text-[#F4E9D7]"
+              } bg-text w-[20px] h-[20px] rounded-full flex items-center justify-center`}
+            >
+              {items.length > 9 ? "9+" : items.length}
+            </button>
+          )}
         </Link>
 
         {/* ❤️ Heart Icon */}
